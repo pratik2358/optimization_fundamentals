@@ -1,0 +1,5 @@
+streamlit>=1.55
+jax>=0.4
+jaxlib>=0.4
+numpy>=1.26
+plotly>=5.0
