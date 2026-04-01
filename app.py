@@ -61,9 +61,9 @@ def make_surface_figure(
             y=traj_y,
             z=traj_z,
             mode="lines+markers",
-            line=dict(color="red", width=6),
-            marker=dict(size=4, color=np.arange(len(traj_x)), colorscale="Plasma"),
-            name="descent path",
+            line=dict(color="#ff4b4b", width=7),
+            marker=dict(size=4, color="#ffffff", line=dict(color="#111111", width=2)),
+            name="trajectory",
         )
     )
     fig.add_trace(
@@ -71,9 +71,12 @@ def make_surface_figure(
             x=[traj_x[0]],
             y=[traj_y[0]],
             z=[traj_z[0]],
-            mode="markers",
-            marker=dict(size=8, color="orange", symbol="diamond"),
-            name="start",
+            mode="markers+text",
+            text=["start"],
+            textposition="top center",
+            textfont=dict(color="#111111", size=12),
+            marker=dict(size=10, color="#ffd166", symbol="diamond", line=dict(color="#111111", width=3)),
+            name="start point",
         )
     )
     fig.add_trace(
@@ -81,9 +84,12 @@ def make_surface_figure(
             x=[traj_x[-1]],
             y=[traj_y[-1]],
             z=[traj_z[-1]],
-            mode="markers",
-            marker=dict(size=8, color="lime", symbol="circle"),
-            name="end",
+            mode="markers+text",
+            text=["end"],
+            textposition="top center",
+            textfont=dict(color="#111111", size=12),
+            marker=dict(size=10, color="#06d6a0", symbol="circle", line=dict(color="#111111", width=3)),
+            name="end point",
         )
     )
     fig.update_layout(
@@ -93,6 +99,17 @@ def make_surface_figure(
             yaxis_title="y",
             zaxis_title="f(x, y)",
             camera=dict(eye=dict(x=1.45, y=1.45, z=0.95)),
+        ),
+        legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=0.98,
+            xanchor="left",
+            x=0.02,
+            bgcolor="rgba(255,255,255,0.92)",
+            bordercolor="rgba(0,0,0,0.35)",
+            borderwidth=1,
+            font=dict(color="#111111", size=12),
         ),
         height=700,
         margin=dict(l=0, r=0, t=50, b=0),
