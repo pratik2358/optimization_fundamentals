@@ -189,14 +189,26 @@ for tab, optimizer_name in zip(optimizer_tabs, OPTIMIZER_SPECS.keys()):
         current_params = {}
         for col, control in zip(param_cols, spec["controls"]):
             with col:
-                current_params[control["name"]] = st.slider(
-                    control["label"],
-                    min_value=control["min"],
-                    max_value=control["max"],
-                    value=control["value"],
-                    step=control["step"],
-                    key=f"{optimizer_name}_{control['name']}",
-                )
+                widget_key = f"{optimizer_name}_{control['name']}"
+                if control["name"] == "eps":
+                    current_params[control["name"]] = st.number_input(
+                        control["label"],
+                        min_value=float(control["min"]),
+                        max_value=float(control["max"]),
+                        value=float(control["value"]),
+                        step=float(control["step"]),
+                        format="%.8e",
+                        key=widget_key,
+                    )
+                else:
+                    current_params[control["name"]] = st.slider(
+                        control["label"],
+                        min_value=control["min"],
+                        max_value=control["max"],
+                        value=control["value"],
+                        step=control["step"],
+                        key=widget_key,
+                    )
 
         try:
             result = compute_trajectory(
